@@ -49,16 +49,16 @@ message:    messageField,
 emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
 .then(() => {
 window.open(waURL, '_blank');
-btn.innerHTML  = 'âœ“ Sent! Check WhatsApp too';
+btn.innerHTML  = '✓“ Sent! Check WhatsApp too';
 btn.style.background = 'linear-gradient(135deg,#0a4a2a,#1a8a3a,#00ff88)';
-showNotification('âœ“ Message sent to email & WhatsApp!');
+showNotification('✓“ Message sent to email & WhatsApp!');
 form.reset();
 resetBtn();
 })
 .catch(() => {
 // Email failed — fall back to WhatsApp only
 window.open(waURL, '_blank');
-btn.innerHTML  = 'âœ“ Sent via WhatsApp';
+btn.innerHTML  = '✓“ Sent via WhatsApp';
 btn.style.background = 'linear-gradient(135deg,#1a5a0a,#2a9a1a,#25D366)';
 showNotification('WhatsApp opened with your enquiry. Email delivery had an issue.');
 form.reset();
@@ -67,7 +67,7 @@ resetBtn();
 } else {
 // EmailJS not configured yet — WhatsApp only
 window.open(waURL, '_blank');
-btn.innerHTML  = 'âœ“ Sent via WhatsApp';
+btn.innerHTML  = '✓“ Sent via WhatsApp';
 btn.style.background = 'linear-gradient(135deg,#1a5a0a,#2a9a1a,#25D366)';
 showNotification('Your enquiry was sent via WhatsApp!');
 form.reset();
@@ -77,7 +77,7 @@ resetBtn();
 
 function showNotification(msg) {
 const n = document.getElementById('notification');
-n.textContent = msg || 'âœ“ Message sent!';
+n.textContent = msg || '✓“ Message sent!';
 n.classList.add('show');
 setTimeout(() => n.classList.remove('show'), 5000);
 }
