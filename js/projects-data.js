@@ -15,7 +15,7 @@ overview: [
 'Working closely with the founder, I developed a complete visual system built around clarity and distinctiveness. Every element — from the logo mark to the colour palette — was crafted with intention and strategic purpose.',
 'The result is a cohesive identity system that gives the client a strong, recognisable presence across all digital and print touchpoints.'
 ],
-gallery: { row1: ['images/project1.png','images/project1.png'], row2: ['images/project1.png','images/project1.png','images/project1.png'] },
+gallery: { cols: 4, rows: 3, items: ['images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png', 'images/project1.png'] },
 process: [
 { title: 'Discovery & Strategy', body: 'Deep-dive session to understand the founder\'s vision, audience, values, and competitive landscape. Defined the brand personality and positioning before any visual work began.' },
 { title: 'Concept Development', body: 'Explored multiple visual directions through moodboards and initial concept sketches. Refined the strongest concept based on strategic alignment and feedback.' },
@@ -39,7 +39,7 @@ overview: [
 'I developed a modular content design system — templates, grids, and visual rules — that the client could use confidently and consistently without needing to start from scratch every time.',
 'The system elevated the creator\'s digital presence, making their content instantly recognisable while keeping production efficient.'
 ],
-gallery: { row1: ['images/project2.png','images/project2.png'], row2: ['images/project2.png','images/project2.png','images/project2.png'] },
+gallery: { cols: 4, rows: 2, items: ['images/project2.png', 'images/project2.png', 'images/project2.png', 'images/project2.png', 'images/project2.png', 'images/project2.png', 'images/project2.png', 'images/project2.png'] },
 process: [
 { title: 'Brand Audit', body: 'Reviewed the existing content and identified inconsistencies. Understood the creator\'s tone, audience, and content pillars.' },
 { title: 'Visual Direction', body: 'Established a refined visual direction that respected the creator\'s existing audience while elevating their design quality.' },
@@ -63,7 +63,7 @@ overview: [
 'I developed the full campaign concept — from the overarching idea and messaging framework to the visual language and key art direction.',
 'Every creative decision was aligned with the brand\'s positioning and designed to generate interest, build trust, and drive action from day one.'
 ],
-gallery: { row1: ['images/project3.png','images/project3.png'], row2: ['images/project3.png','images/project3.png','images/project3.png'] },
+gallery: { cols: 4, rows: 3, items: ['images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png', 'images/project3.png'] },
 process: [
 { title: 'Market Research', body: 'Analysed the competitive landscape to identify white space and opportunities for the product\'s positioning and communication.' },
 { title: 'Campaign Concept', body: 'Developed the campaign idea, core message, and visual theme that would guide all creative output.' },
@@ -87,7 +87,7 @@ overview: [
 'I worked through a discovery process to understand the firm\'s strengths, target clients, and competitive advantages — then translated those insights into a clear, usable brand framework.',
 'The result gave the team a shared language, a compelling brand story, and a communication architecture that could scale as the business grows.'
 ],
-gallery: { row1: ['images/project4.jpg','images/project4.jpg'], row2: ['images/project4.jpg','images/project4.jpg','images/project4.jpg'] },
+gallery: { cols: 4, rows: 2, items: ['images/project4.png', 'images/project4.png', 'images/project4.png', 'images/project4.png', 'images/project4.png', 'images/project4.png', 'images/project4.png'] },
 process: [
 { title: 'Discovery Sessions', body: 'Conducted in-depth interviews with the founding team to extract the brand\'s core strengths, values, and differentiators.' },
 { title: 'Competitive Analysis', body: 'Mapped the competitive landscape to identify positioning opportunities and gaps the brand could own.' },
@@ -111,7 +111,7 @@ overview: [
 'I focused on creating a tight, well-considered visual system — colour palette, typography, and usage rules — that would make the startup look polished and professional from day one.',
 'The brand guidelines ensure the team can apply the identity consistently as they grow, without needing to reinvent the wheel every time.'
 ],
-gallery: { row1: ['images/project5.png','images/project5.png'], row2: ['images/project5.png','images/project5.png','images/project5.png'] },
+gallery: { cols: 4, rows: 3, items: ['images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png', 'images/project5.png'] },
 process: [
 { title: 'Brand Direction', body: 'Defined the visual personality — modern, trustworthy, and approachable — based on the startup\'s values and target audience.' },
 { title: 'Colour & Typography', body: 'Built a primary and secondary colour system with accessibility in mind, paired with a clear typographic hierarchy.' },
@@ -135,7 +135,7 @@ overview: [
 'I created a set of flexible, on-brand templates that the owner could use independently — without needing design skills — while maintaining a professional, cohesive look.',
 'The templates were built with ease of use in mind: editable colours, swappable images, and clear structure so content creation became faster and more consistent.'
 ],
-gallery: { row1: ['images/project6.png','images/project6.png'], row2: ['images/project6.png','images/project6.png','images/project6.png'] },
+gallery: { cols: 3, rows: 2, items: ['images/project6.png', 'images/project6.png', 'images/project6.png', 'images/project6.png', 'images/project6.png', 'images/project6.png'] },
 process: [
 { title: 'Brand Understanding', body: 'Reviewed the client\'s existing brand assets, colour preferences, and content types to understand what templates were most needed.' },
 { title: 'Template Architecture', body: 'Planned a template system covering all key content formats — announcements, quotes, promotions, and general posts.' },

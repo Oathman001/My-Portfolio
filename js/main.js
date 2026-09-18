@@ -38,6 +38,53 @@ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
 
 // ============================================================
+//  RENDER PROJECT GALLERY (DYNAMIC)
+// ============================================================
+function renderGallery(gallery) {
+  // Get the gallery section container
+  const container = document.getElementById('detail-gallery-section');
+  // Remove all existing gallery rows
+  const existingRows = container.querySelectorAll('.project-gallery-grid');
+  existingRows.forEach(row => row.remove());
+
+  // Support both new format (cols, rows, items) and old format (row1, row2...)
+  if (gallery.cols !== undefined && gallery.items) {
+    // New format: split items array into rows based on cols
+    const cols = gallery.cols;
+    const items = gallery.items;
+    let rowIndex = 0;
+    for (let i = 0; i < items.length; i += cols) {
+      const rowItems = items.slice(i, i + cols);
+      const rowDiv = document.createElement('div');
+      rowDiv.className = `project-gallery-grid cols-${cols}`;
+      rowDiv.id = `detail-gallery-row${rowIndex + 1}`;
+      rowDiv.style.marginBottom = (i + cols < items.length) ? '1.5rem' : '0';
+      rowDiv.innerHTML = rowItems.map(src =>
+        `<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
+      ).join('');
+      container.appendChild(rowDiv);
+      rowIndex++;
+    }
+  } else {
+    // Old format: gallery with row1, row2, etc. keys
+    const rowKeys = Object.keys(gallery).filter(k => k.startsWith('row'));
+    rowKeys.forEach((key, index) => {
+      const rowData = gallery[key];
+      const rowId = `detail-gallery-${key}`;
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'project-gallery-grid cols-3';
+      rowDiv.id = rowId;
+      rowDiv.style.marginBottom = index < rowKeys.length - 1 ? '1.5rem' : '0';
+      rowDiv.innerHTML = rowData.map(src =>
+        `<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
+      ).join('');
+      container.appendChild(rowDiv);
+    });
+  }
+}
+
+
+// ============================================================
 
 //  OPEN PROJECT DETAIL
 // ============================================================
@@ -63,12 +110,10 @@ document.getElementById('detail-year-2').textContent = p.year;
 document.getElementById('detail-duration').textContent = p.duration;
 document.getElementById('detail-deliverables').innerHTML = p.deliverables.map(d => `<li>${d}</li>`).join('');
 document.getElementById('detail-tools').innerHTML = p.tools.map(t => `<li>${t}</li>`).join('');
-document.getElementById('detail-gallery-row1').innerHTML = p.gallery.row1.map(src =>
-`<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
-).join('');
-document.getElementById('detail-gallery-row2').innerHTML = p.gallery.row2.map(src =>
-`<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
-).join('');
+
+// Render gallery dynamically based on number of rows
+renderGallery(p.gallery);
+
 document.getElementById('detail-process').innerHTML = p.process.map((step, i) =>
 `<div class="process-step"><div class="process-step-num">0${i+1}</div><div class="process-step-content"><h4>${step.title}</h4><p>${step.body}</p></div></div>`
 ).join('');
