@@ -1,4 +1,4 @@
-//  CONTACT FORM â€” ADDITION
+//  CONTACT FORM — ADDITION
 //  On submit: sends email via EmailJS + opens WhatsApp
 //  with the full enquiry pre-filled.
 // ============================================================
@@ -14,7 +14,7 @@ const serviceField = (form.service.value || '').trim();
 const messageField = (form.message.value || '').trim();
 
 btn.disabled  = true;
-btn.innerHTML = 'Sendingâ€¦';
+btn.innerHTML = 'Sending…';
 
 // Build WhatsApp message
 const waLines = [
@@ -41,8 +41,8 @@ const templateParams = {
 to_name:    'Othman',
 from_name:  senderName,
 from_email: senderEmail,
-project:    projectField || 'â€”',
-service:    serviceField || 'â€”',
+project:    projectField || '—',
+service:    serviceField || '—',
 message:    messageField,
 };
 
@@ -56,7 +56,7 @@ form.reset();
 resetBtn();
 })
 .catch(() => {
-// Email failed â€” fall back to WhatsApp only
+// Email failed — fall back to WhatsApp only
 window.open(waURL, '_blank');
 btn.innerHTML  = 'âœ“ Sent via WhatsApp';
 btn.style.background = 'linear-gradient(135deg,#1a5a0a,#2a9a1a,#25D366)';
@@ -65,7 +65,7 @@ form.reset();
 resetBtn();
 });
 } else {
-// EmailJS not configured yet â€” WhatsApp only
+// EmailJS not configured yet — WhatsApp only
 window.open(waURL, '_blank');
 btn.innerHTML  = 'âœ“ Sent via WhatsApp';
 btn.style.background = 'linear-gradient(135deg,#1a5a0a,#2a9a1a,#25D366)';

@@ -1,32 +1,32 @@
-//  EMAILJS SETUP â€” ADDITION
+//  EMAILJS SETUP — ADDITION
 // ============================================================
 //
-//  âœ… HOW TO ACTIVATE EMAIL DELIVERY:
+//  ✓ HOW TO ACTIVATE EMAIL DELIVERY:
 //
 //  1. Go to https://emailjs.com and create a free account.
-//  2. Add an Email Service (use Gmail â€” connect your
+//  2. Add an Email Service (use Gmail — connect your
 //     creativeoathman@gmail.com account).
-//     â†’ Copy the Service ID and paste it below.
+//     → Copy the Service ID and paste it below.
 //
 //  3. Create an Email Template. Use these variable names:
-//       {{to_name}}    â€” your name (pre-filled as "Othman")
-//       {{from_name}}  â€” sender's name
-//       {{from_email}} â€” sender's email
-//       {{project}}    â€” project / business
-//       {{service}}    â€” service interested in
-//       {{message}}    â€” the message body
-//     â†’ Copy the Template ID and paste it below.
+//       {{to_name}}    — your name (pre-filled as "Othman")
+//       {{from_name}}  — sender's name
+//       {{from_email}} — sender's email
+//       {{project}}    — project / business
+//       {{service}}    — service interested in
+//       {{message}}    — the message body
+//     → Copy the Template ID and paste it below.
 //
-//  4. Go to Account â†’ API Keys â†’ copy your Public Key.
-//     â†’ Paste it below.
+//  4. Go to Account → API Keys → copy your Public Key.
+//     → Paste it below.
 //
 //  Replace the three placeholder strings and you're done.
 // ============================================================
-const EMAILJS_PUBLIC_KEY  = 'd2DwHor0ROmH3bZYE';   // â† replace
-const EMAILJS_SERVICE_ID  = 'service_bzl8zqi';   // â† replace
-const EMAILJS_TEMPLATE_ID = 'template_qnzb2dl';  // â† replace
+const EMAILJS_PUBLIC_KEY  = 'd2DwHor0ROmH3bZYE';   // → replace
+const EMAILJS_SERVICE_ID  = 'service_bzl8zqi';   // → replace
+const EMAILJS_TEMPLATE_ID = 'template_qnzb2dl';  // → replace
 
-// Your WhatsApp number â€” digits only, include country code
+// Your WhatsApp number — digits only, include country code
 const WHATSAPP_NUMBER = '2349061822492';
 
 // Initialise EmailJS

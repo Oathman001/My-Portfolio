@@ -600,7 +600,7 @@ max-width: 340px;
 .notification.show { transform: translateY(0); opacity: 1; }
 
 /* ============================================
-WHATSAPP FLOATING BUTTON â€” ADDITION
+WHATSAPP FLOATING BUTTON — ADDITION
 ============================================ */
 .whatsapp-float {
 position: fixed;
@@ -689,7 +689,7 @@ section { padding: 4rem 1.25rem; }
 .project-gallery-grid.cols-3 { grid-template-columns: 1fr; }
 .about-grid { grid-template-columns: 1fr !important; }
 .contact-grid { grid-template-columns: 1fr !important; }
-/* hide label on mobile â€” button only */
+/* hide label on mobile — button only */
 .whatsapp-float-label { display: none; }
 .whatsapp-float-btn { width: 52px; height: 52px; }
 }
