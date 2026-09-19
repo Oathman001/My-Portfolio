@@ -60,7 +60,7 @@ function renderGallery(gallery) {
       rowDiv.id = `detail-gallery-row${rowIndex + 1}`;
       rowDiv.style.marginBottom = (i + cols < items.length) ? '1.5rem' : '0';
       rowDiv.innerHTML = rowItems.map(src =>
-        `<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
+        `<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" loading="lazy" decoding="async" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
       ).join('');
       container.appendChild(rowDiv);
       rowIndex++;
@@ -76,7 +76,7 @@ function renderGallery(gallery) {
       rowDiv.id = rowId;
       rowDiv.style.marginBottom = index < rowKeys.length - 1 ? '1.5rem' : '0';
       rowDiv.innerHTML = rowData.map(src =>
-        `<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
+        `<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" loading="lazy" decoding="async" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
       ).join('');
       container.appendChild(rowDiv);
     });
@@ -98,7 +98,7 @@ document.getElementById('detail-title').textContent = p.title;
 document.getElementById('detail-subtitle').textContent = p.subtitle;
 const mainImgEl = document.getElementById('detail-main-image');
 mainImgEl.innerHTML = p.mainImage
-? `<img src="${p.mainImage}" alt="${p.title}" style="width:100%; height:100%; object-fit:cover;">`
+? `<img src="${p.mainImage}" alt="${p.title}" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover;">`
 : `<div class="project-main-image-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Project Cover Image</span></div>`;
 document.getElementById('detail-overview-title').textContent = p.overviewTitle;
 document.getElementById('detail-overview-p1').textContent = p.overview[0] || '';
