@@ -12,6 +12,12 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
+/* <picture> wrappers must not affect layout — render as if not there.
+   display:contents removes the box entirely; the block fallback covers
+   any engine lacking contents support. */
+picture { display: block; }
+picture { display: contents; }
+
 body {
 background-color: #0B0B0C;
 color: #D7DDE8;

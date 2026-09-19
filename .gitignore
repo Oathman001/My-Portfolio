@@ -32,3 +32,6 @@ build/
 
 # Auto-generated files
 *.map
+
+# Local-only lossless backups (recoverable from git history too)
+images/originals/

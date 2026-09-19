@@ -38,6 +38,26 @@ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
 
 // ============================================================
+//  LOSSLESS WEBP PAIRING
+//  WebP lossless is mathematically identical to the PNG - zero
+//  quality difference - but ~30% smaller. Browsers that don't
+//  support WebP silently fall back to the verified PNG.
+// ============================================================
+const WEBP_COVERS = {
+  'images/project2.png': 'images/project2.webp',
+  'images/project3.png': 'images/project3.webp',
+  'images/project6.png': 'images/project6.webp'
+};
+
+function picMarkup(src, imgAttrs) {
+  const webp = WEBP_COVERS[src];
+  const img = `<img src="${src}" ${imgAttrs}>`;
+  return webp
+    ? `<picture><source type="image/webp" srcset="${webp}">${img}</picture>`
+    : img;
+}
+
+// ============================================================
 //  RENDER PROJECT GALLERY (DYNAMIC)
 // ============================================================
 function renderGallery(gallery) {
@@ -60,7 +80,7 @@ function renderGallery(gallery) {
       rowDiv.id = `detail-gallery-row${rowIndex + 1}`;
       rowDiv.style.marginBottom = (i + cols < items.length) ? '1.5rem' : '0';
       rowDiv.innerHTML = rowItems.map(src =>
-        `<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" loading="lazy" decoding="async" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
+        `<div class="project-gallery-item">${src ? picMarkup(src, 'alt="Gallery image" loading="lazy" decoding="async" style="aspect-ratio:4/3; object-fit:cover;"') : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
       ).join('');
       container.appendChild(rowDiv);
       rowIndex++;
@@ -76,7 +96,7 @@ function renderGallery(gallery) {
       rowDiv.id = rowId;
       rowDiv.style.marginBottom = index < rowKeys.length - 1 ? '1.5rem' : '0';
       rowDiv.innerHTML = rowData.map(src =>
-        `<div class="project-gallery-item">${src ? `<img src="${src}" alt="Gallery image" loading="lazy" decoding="async" style="aspect-ratio:4/3; object-fit:cover;">` : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
+        `<div class="project-gallery-item">${src ? picMarkup(src, 'alt="Gallery image" loading="lazy" decoding="async" style="aspect-ratio:4/3; object-fit:cover;"') : `<div class="project-gallery-item-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Gallery Image</span></div>`}</div>`
       ).join('');
       container.appendChild(rowDiv);
     });
@@ -99,7 +119,7 @@ document.getElementById('detail-title').textContent = p.title;
 document.getElementById('detail-subtitle').textContent = p.subtitle;
 const mainImgEl = document.getElementById('detail-main-image');
 mainImgEl.innerHTML = p.mainImage
-? `<img src="${p.mainImage}" alt="${p.title}" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover;">`
+? picMarkup(p.mainImage, `alt="${p.title}" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover;"`)
 : `<div class="project-main-image-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Project Cover Image</span></div>`;
 document.getElementById('detail-overview-title').textContent = p.overviewTitle;
 document.getElementById('detail-overview-p1').textContent = p.overview[0] || '';
