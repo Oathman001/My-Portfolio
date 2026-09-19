@@ -46,7 +46,7 @@ process: [
 { title: 'Template System Design', body: 'Built a full set of modular templates in Figma — carousel slides, story frames, highlight covers, and post formats — all built on a consistent grid.' },
 { title: 'Handover & Training', body: 'Delivered editable files with clear instructions so the client could use and update their templates independently.' }
 ],
-results: [{ num:'40+', label:'Templates Delivered' },{ num:'100%', label:'Consistent Brand Voice' },{ num:'2x', label:'Content Production Speed' },{ num:'→‘', label:'Audience Engagement' }],
+results: [{ num:'40+', label:'Templates Delivered' },{ num:'100%', label:'Consistent Brand Voice' },{ num:'2x', label:'Content Production Speed' },{ num:'→', label:'Audience Engagement' }],
 prev: 'project-1', next: 'project-3'
 },
 'project-3': {
@@ -70,7 +70,7 @@ process: [
 { title: 'Visual Development', body: 'Created key visuals, typography treatments, and the colour story for the campaign — building a distinctive visual identity for the launch.' },
 { title: 'Asset Production', body: 'Produced all launch-ready creative assets — ad formats, social visuals, and marketing materials — ready for immediate deployment.' }
 ],
-results: [{ num:'Day 1', label:'Launch-Ready Delivery' },{ num:'15+', label:'Creative Assets Produced' },{ num:'100%', label:'Brand-Aligned Execution' },{ num:'→‘', label:'Market Entry Visibility' }],
+results: [{ num:'Day 1', label:'Launch-Ready Delivery' },{ num:'15+', label:'Creative Assets Produced' },{ num:'100%', label:'Brand-Aligned Execution' },{ num:'→', label:'Market Entry Visibility' }],
 prev: 'project-2', next: 'project-4'
 },
 'project-4': {
@@ -94,7 +94,7 @@ process: [
 { title: 'Framework Development', body: 'Built the brand positioning statement, messaging hierarchy, content pillars, and communication guidelines.' },
 { title: 'Documentation & Presentation', body: 'Delivered a clear, well-structured strategy document with practical guidelines the team could implement immediately.' }
 ],
-results: [{ num:'1 Doc', label:'Complete Strategy Framework' },{ num:'Clear', label:'Brand Positioning Established' },{ num:'5 Pillars', label:'Content Strategy Defined' },{ num:'→‘', label:'Team Alignment & Confidence' }],
+results: [{ num:'1 Doc', label:'Complete Strategy Framework' },{ num:'Clear', label:'Brand Positioning Established' },{ num:'5 Pillars', label:'Content Strategy Defined' },{ num:'→', label:'Team Alignment & Confidence' }],
 prev: 'project-3', next: 'project-5'
 },
 'project-5': {
@@ -118,7 +118,7 @@ process: [
 { title: 'Logo Refinement', body: 'Refined the existing logomark to align with the new visual direction and ensure it works across all sizes and backgrounds.' },
 { title: 'Guidelines Document', body: 'Produced a concise brand guidelines document with real usage examples to empower the team.' }
 ],
-results: [{ num:'Day 1', label:'Investor-Ready Brand' },{ num:'100%', label:'Visual Consistency' },{ num:'→‘', label:'Perceived Credibility' },{ num:'WCAG', label:'Accessible Colour System' }],
+results: [{ num:'Day 1', label:'Investor-Ready Brand' },{ num:'100%', label:'Visual Consistency' },{ num:'→', label:'Perceived Credibility' },{ num:'WCAG', label:'Accessible Colour System' }],
 prev: 'project-4', next: 'project-6'
 },
 'project-6': {
@@ -142,7 +142,7 @@ process: [
 { title: 'Design & Build', body: 'Designed and built all templates with clear placeholder zones, brand colours, and typography already applied.' },
 { title: 'File Delivery & Walkthrough', body: 'Delivered all editable files with a short walkthrough guide so the client could start using them immediately with confidence.' }
 ],
-results: [{ num:'25+', label:'Templates Delivered' },{ num:'3x', label:'Faster Content Creation' },{ num:'100%', label:'Brand Consistency' },{ num:'→‘', label:'Professional Presence' }],
+results: [{ num:'25+', label:'Templates Delivered' },{ num:'3x', label:'Faster Content Creation' },{ num:'100%', label:'Brand Consistency' },{ num:'→', label:'Professional Presence' }],
 prev: 'project-5', next: null
 }
 };
