@@ -6,33 +6,53 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://oathman-portfolio.netlify.app/#project-1</loc>
+    <loc>https://oathman-portfolio.netlify.app/#/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oathman-portfolio.netlify.app/#project-2</loc>
+    <loc>https://oathman-portfolio.netlify.app/#/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oathman-portfolio.netlify.app/#project-3</loc>
+    <loc>https://oathman-portfolio.netlify.app/#/portfolio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://oathman-portfolio.netlify.app/#/project/project-1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oathman-portfolio.netlify.app/#project-4</loc>
+    <loc>https://oathman-portfolio.netlify.app/#/project/project-2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oathman-portfolio.netlify.app/#project-5</loc>
+    <loc>https://oathman-portfolio.netlify.app/#/project/project-3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oathman-portfolio.netlify.app/#project-6</loc>
+    <loc>https://oathman-portfolio.netlify.app/#/project/project-4</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oathman-portfolio.netlify.app/#/project/project-5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oathman-portfolio.netlify.app/#/project/project-6</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oathman-portfolio.netlify.app/#/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

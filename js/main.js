@@ -88,10 +88,11 @@ function renderGallery(gallery) {
 
 //  OPEN PROJECT DETAIL
 // ============================================================
-function openProject(projectId) {
+function openProject(projectId, fromRoute) {
 const p = projects[projectId];
-if (!p) return;
+if (!p) { showPage('portfolio', true); return; }
 window._currentProject = projectId;
+if (!fromRoute) { syncHash('project/' + projectId); }
 document.getElementById('detail-category').textContent = p.category;
 document.getElementById('detail-year').textContent = p.year;
 document.getElementById('detail-title').textContent = p.title;
@@ -129,14 +130,65 @@ if (p.next && projects[p.next]) { nextWrap.style.display='flex'; nextTitle.textC
 showPage('project-detail');
 }
 
-function goBackToPortfolio() { showPage('portfolio'); }
+function goBackToPortfolio() { routeTo('portfolio'); }
+
+
+// ============================================================
+
+//  HASH ROUTER (deep links + back/forward support)
+//  Routes: '' | 'home' | 'about' | 'services' | 'portfolio'
+//          | 'contact' | 'project/<project-id>'
+// ============================================================
+const VALID_PAGES = ['home', 'about', 'services', 'portfolio', 'contact'];
+let _routing = false;
+
+// Write the hash without triggering a second navigation pass.
+function syncHash(fragment) {
+  const target = fragment ? '#/' + fragment : '#/';
+  if (window.location.hash === target) return;
+  _routing = true;
+  window.location.hash = target;
+  setTimeout(() => { _routing = false; }, 0);
+}
+
+// Programmatic navigation: updates hash, lets the router render.
+function routeTo(dest) {
+  const target = dest ? '#/' + dest : '#/';
+  if (window.location.hash === target) {
+    handleRoute();
+  } else {
+    window.location.hash = target;
+  }
+}
+
+// Read the current hash and render the matching view.
+function handleRoute() {
+  const raw = (window.location.hash || '').replace(/^#\/?/, '').trim();
+  const parts = raw.split('/');
+  if (parts[0] === 'project' && parts[1] && parts[1].trim() !== '') {
+    if (projects[parts[1]]) {
+      openProject(parts[1], true);
+    } else {
+      showPage('portfolio', true);
+    }
+    return;
+  }
+  const key = VALID_PAGES.includes(parts[0]) ? parts[0] : 'home';
+  showPage(key, true);
+}
+
+window.addEventListener('hashchange', () => {
+  if (_routing) return;
+  handleRoute();
+});
 
 
 // ============================================================
 
 //  PAGE NAVIGATION
 // ============================================================
-function showPage(page) {
+function showPage(page, fromRoute) {
+if (!fromRoute && page !== 'project-detail') { syncHash(page === 'home' ? '' : page); }
 document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
 document.getElementById('page-' + page).classList.add('active');
 document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -186,5 +238,5 @@ nav.style.borderBottomColor = window.scrollY > 40 ? 'rgba(170,178,195,0.12)' : '
 
 document.addEventListener('DOMContentLoaded', () => {
 initReveal();
-document.getElementById('nav-home').classList.add('active');
+handleRoute();
 });
