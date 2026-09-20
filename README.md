@@ -5,20 +5,46 @@ A personal portfolio website built with HTML, CSS, and JavaScript. This is a sin
 ## Project Structure
 
 ```
-├── Index.html          # Main HTML file with all page sections
+├── Index.html            # Main HTML file with all page sections
+├── 404.html              # Custom 404 error page
+├── manifest.json         # PWA manifest (installability, theme colors, icons)
+├── _redirects            # Netlify SPA fallback for clean URLs
 ├── css/
-│   └── main.css        # All styles (formerly inline in HTML)
+│   └── main.css          # All styles (formerly inline in HTML)
 ├── js/
-│   ├── main.js         # Page navigation, EmailJS setup, scroll animations
+│   ├── main.js           # History-API router, EmailJS setup, scroll animations, WebP pairing
 │   ├── projects-data.js # Project data and definitions
 │   └── contact-form.js   # Contact form handler and WhatsApp integration
-└── images/
-    ├── profile.jpeg    # Profile image
-    ├── about.jpg       # About section image
-    ├── lifestyle.jpg   # Lifestyle image
-    ├── work.jpg        # Work image
-    └── project1-6.*    # Project images
+├── images/
+│   ├── profile.jpeg    # Profile image (hero, social preview, favicon, manifest)
+│   ├── about.jpg       # About section image
+│   ├── lifestyle.jpg   # Lifestyle image
+│   ├── work.jpg        # Work image
+│   ├── project1-6.*    # Project images (PNG + WebP variants)
+│   └── social-preview.png # 1200×630 social share image (recommended)
+├── robots.txt          # SEO robots directives
+├── sitemap.xml         # Sitemap for search engines
+└── LICENSE
 ```
+
+## Routing
+
+This site uses the **History API** for clean, crawlable URLs (no `#` fragments):
+
+| URL | Page |
+|-----|------|
+| `/` | Home |
+| `/about` | About |
+| `/services` | Services |
+| `/portfolio` | Portfolio |
+| `/contact` | Contact |
+| `/contact?service=Brand%20Identity` | Contact with service pre-filled |
+| `/project/project-1` | Project detail |
+
+Navigation is handled client-side via `history.pushState()`; the browser back/forward buttons work through the `popstate` event. The `_redirects` file tells Netlify to serve `Index.html` for every route, so direct URL loads and page refreshes work correctly.
+
+> **Note:** If deploying to a host other than Netlify, add the equivalent SPA rewrite rule (e.g. Apache `.htaccess`, Vercel `vercel.json`, or nginx `try_files`).
+
 
 ## Features
 
@@ -27,9 +53,16 @@ A personal portfolio website built with HTML, CSS, and JavaScript. This is a sin
 - **Smooth Transitions** — Page fade-in animations
 - **Project Filtering** — Filter portfolio items by category
 - **Contact Form** — Integrated with EmailJS for email submissions
-- **WhatsApp Integration** — Quick message button
+- **WhatsApp Integration** — Quick message button + WhatsApp fallback for contact form
 - **Responsive Design** — Works on mobile, tablet, and desktop
 - **Scroll Animations** — Elements animate as they scroll into view
+- **SEO Optimized** — JSON-LD structured data, keyword/author meta tags, Open Graph & Twitter cards
+- **Social Sharing** — Proper og:image (1200×630 social preview), Twitter Card support
+- **PWA Ready** — manifest.json for installability on mobile/desktop
+- **Performance** — WebP image pairing, lazy-loading, preconnect hints, inline SVG favicon
+- **Accessibility** — `aria-current` on active nav links, `aria-label` on buttons
+- **Back-to-Top Button** — Floating scroll-to-top button appears after scrolling
+- **Custom 404 Page** — Friendly error page with navigation back home
 
 ## Technologies Used
 
@@ -64,13 +97,14 @@ const projects = {
 };
 ```
 
-#### EmailJS Setup
-1. Sign up at [emailjs.com](https://www.emailjs.com/)
-2. Get your public key and replace `YOUR_PUBLIC_KEY` in `js/main.js`
-3. Set up an email template in EmailJS dashboard
+#### EmailJS Setup (already configured)
+The EmailJS keys in `js/main.js` are pre-filled. To verify or update:
+
+1. Sign in at [emailjs.com](https://www.emailjs.com/)
+2. `EMAILJS_PUBLIC_KEY`, `EMAILJS_SERVICE_ID`, and `EMAILJS_TEMPLATE_ID` are set in `js/main.js`
 
 #### WhatsApp Number
-In `js/contact-form.js`, update the WhatsApp number:
+Update the WhatsApp number in `js/main.js`:
 
 ```javascript
 const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER";

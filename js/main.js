@@ -44,8 +44,11 @@ emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 //  support WebP silently fall back to the verified PNG.
 // ============================================================
 const WEBP_COVERS = {
+  'images/project1.png': 'images/project1.webp',
   'images/project2.png': 'images/project2.webp',
   'images/project3.png': 'images/project3.webp',
+  'images/project4.png': 'images/project4.webp',
+  'images/project5.png': 'images/project5.webp',
   'images/project6.png': 'images/project6.webp'
 };
 
@@ -112,7 +115,7 @@ function openProject(projectId, fromRoute) {
 const p = projects[projectId];
 if (!p) { showPage('portfolio', true); return; }
 window._currentProject = projectId;
-if (!fromRoute) { syncHash('project/' + projectId); }
+if (!fromRoute) { pushRoute('project-detail', { id: projectId }); }
 document.getElementById('detail-category').textContent = p.category;
 document.getElementById('detail-year').textContent = p.year;
 document.getElementById('detail-title').textContent = p.title;
@@ -155,52 +158,114 @@ function goBackToPortfolio() { routeTo('portfolio'); }
 
 // ============================================================
 
-//  HASH ROUTER (deep links + back/forward support)
-//  Routes: '' | 'home' | 'about' | 'services' | 'portfolio'
-//          | 'contact' | 'project/<project-id>'
 // ============================================================
-const VALID_PAGES = ['home', 'about', 'services', 'portfolio', 'contact'];
-let _routing = false;
+//  HISTORY-API ROUTER (clean URLs, back button, deep links)
+//  Routes:  /             -> home
+//           /about        -> about
+//           /services     -> services
+//           /portfolio    -> portfolio
+//           /contact      -> contact
+//           /project/<id> -> project detail
+// ============================================================
+const VALID_PAGES = ["home", "about", "services", "portfolio", "contact"];
 
-// Write the hash without triggering a second navigation pass.
-function syncHash(fragment) {
-  const target = fragment ? '#/' + fragment : '#/';
-  if (window.location.hash === target) return;
-  _routing = true;
-  window.location.hash = target;
-  setTimeout(() => { _routing = false; }, 0);
-}
-
-// Programmatic navigation: updates hash, lets the router render.
-function routeTo(dest) {
-  const target = dest ? '#/' + dest : '#/';
-  if (window.location.hash === target) {
-    handleRoute();
+// Push a clean URL and render the matching view.
+function pushRoute(page, params) {
+  params = params || {};
+  let url;
+  if (page === "project-detail" && params.id) {
+    url = "/project/" + params.id;
   } else {
-    window.location.hash = target;
+    url = (page === "home") ? "/" : "/" + page;
+    const qs = Object.keys(params).length
+      ? "?" + new URLSearchParams(params).toString()
+      : "";
+    url += qs;
   }
-}
-
-// Read the current hash and render the matching view.
-function handleRoute() {
-  const raw = (window.location.hash || '').replace(/^#\/?/, '').trim();
-  const parts = raw.split('/');
-  if (parts[0] === 'project' && parts[1] && parts[1].trim() !== '') {
-    if (projects[parts[1]]) {
-      openProject(parts[1], true);
-    } else {
-      showPage('portfolio', true);
-    }
+  if (location.pathname + location.search === url) {
+    renderFromPath();
     return;
   }
-  const key = VALID_PAGES.includes(parts[0]) ? parts[0] : 'home';
-  showPage(key, true);
+  history.pushState({ page: page, params: params }, "", url);
+  renderFromPath();
 }
 
-window.addEventListener('hashchange', () => {
-  if (_routing) return;
-  handleRoute();
+// Browser back / forward support.
+window.addEventListener("popstate", () => { renderFromPath(); });
+
+// Render whatever the current URL points at.
+// Called after pushState and on popstate.
+function renderFromPath() {
+  const pathname = location.pathname.replace(/\/+$/, "") || "/";
+  const params = {};
+  if (location.search) {
+    new URLSearchParams(location.search).forEach((v, k) => {
+      params[k] = v;
+    });
+  }
+  window._routeParams = params;
+
+  // Project detail: /project/<project-id>
+  if (pathname.startsWith("/project/")) {
+    const id = pathname.slice("/project/".length).split("/")[0];
+    if (projects[id]) {
+      openProject(id, true);
+      return;
+    }
+  }
+
+  const key = pathname === "/" ? "home" : pathname.slice(1);
+  const target = VALID_PAGES.includes(key) ? key : "home";
+  showPage(target, true);
+}
+
+// Programmatic navigation — used by every onclick handler below.
+function routeTo(dest, params) {
+  pushRoute(dest, params || {});
+}
+
+// Navigate to contact page with project category pre-filled.
+function contactWithProject(projectId) {
+  const p = projects[projectId];
+  const service = p ? p.category : "";
+  pushRoute("contact", service ? { service: service } : {});
+}
+// Push a raw URL path (used by the internal-link interceptor below).
+function navigateToUrl(url) {
+  if (location.pathname + location.search === url) {
+    renderFromPath();
+    return;
+  }
+  history.pushState({}, '', url);
+  renderFromPath();
+}
+
+// Intercept internal link clicks so they stay client-side.
+// Without this, <a href="/about"> would trigger a full page reload
+// because the browser follows the href after the inline handler runs.
+document.addEventListener('click', (e) => {
+  if (e.defaultPrevented || e.button !== 0) return;
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+  const target = e.target;
+  const link = target && target.closest ? target.closest('a[href]') : null;
+  if (!link) return;
+
+  const href = link.getAttribute('href') || '';
+  if (href.charAt(0) !== '/') return;              // internal absolute paths only
+  if (link.target && link.target !== '_self') return;
+  if (link.hasAttribute('download')) return;
+
+  e.preventDefault();                              // stop the full-page navigation
+
+  // An inline routeTo()/contactWithProject() handler has already routed.
+  const inline = link.getAttribute('onclick') || '';
+  const alreadyRouted =
+    inline.indexOf('routeTo(') !== -1 || inline.indexOf('contactWithProject(') !== -1;
+  if (!alreadyRouted) navigateToUrl(href);
 });
+
+
 
 
 // ============================================================
@@ -208,19 +273,29 @@ window.addEventListener('hashchange', () => {
 //  PAGE NAVIGATION
 // ============================================================
 function showPage(page, fromRoute) {
-if (!fromRoute && page !== 'project-detail') { syncHash(page === 'home' ? '' : page); }
 document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
 document.getElementById('page-' + page).classList.add('active');
-document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.classList.remove('active');
+  a.removeAttribute('aria-current');
+});
 if (page === 'project-detail') {
 const pl = document.getElementById('nav-portfolio');
-if (pl) pl.classList.add('active');
+if (pl) { pl.classList.add('active'); pl.setAttribute('aria-current', 'page'); }
 } else {
 const al = document.getElementById('nav-' + page);
-if (al) al.classList.add('active');
+if (al) { al.classList.add('active'); al.setAttribute('aria-current', 'page'); }
 }
 window.scrollTo({ top: 0, behavior: 'smooth' });
 setTimeout(() => initReveal(), 100);
+
+  // Pre-fill contact form from project-scoped route params
+  if (page === 'contact' && window._routeParams && window._routeParams.service) {
+    const serviceField = document.getElementById('service');
+    if (serviceField) {
+      serviceField.value = window._routeParams.service;
+    }
+  }
 }
 
 function toggleMobile() { document.getElementById('mobileMenu').classList.toggle('open'); }
@@ -254,9 +329,23 @@ setTimeout(() => { card.style.display='none'; }, 300);
 window.addEventListener('scroll', () => {
 const nav = document.getElementById('navbar');
 nav.style.borderBottomColor = window.scrollY > 40 ? 'rgba(170,178,195,0.12)' : 'rgba(170,178,195,0.1)';
+
+// Back-to-top button visibility
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+  backToTop.classList.toggle('show', window.scrollY > 600);
+}
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-initReveal();
-handleRoute();
+  initReveal();
+  renderFromPath();
+
+  // Back-to-top click handler
+  const btt = document.getElementById('backToTop');
+  if (btt) {
+    btt.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 });

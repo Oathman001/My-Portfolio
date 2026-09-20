@@ -1,0 +1,13 @@
+{
+  "name": "Oathman — Creative Strategist",
+  "short_name": "Oathman",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0C",
+  "theme_color": "#0B0B0C",
+  "description": "Brand identities, social content systems, and campaign visuals for founders, creators, and startups.",
+  "icons": [
+    { "src": "images/profile.jpeg", "sizes": "any", "type": "image/jpeg", "purpose": "any" },
+    { "src": "images/profile.jpeg", "sizes": "any", "type": "image/jpeg", "purpose": "maskable" }
+  ]
+}
