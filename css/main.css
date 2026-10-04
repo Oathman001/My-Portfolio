@@ -130,7 +130,11 @@ linear-gradient(rgba(15, 82, 186, 0.04) 1px, transparent 1px),
 linear-gradient(90deg, rgba(15, 82, 186, 0.04) 1px, transparent 1px);
 background-size: 60px 60px;
 }
-.hero-content { position: relative; z-index: 2; padding-top: 12rem; }
+/* Only a small gap below the fixed nav — the grid wrapper
+   (Index.html) already centres this with min-height:calc(100vh - 72px).
+   The old padding-top:12rem here added ~192px of dead space above the
+   headline and knocked the text column out of line with the photo. */
+.hero-content { position: relative; z-index: 2; padding-top: 2rem; }
 
 /* ====================================================
    HERO BACKGROUND — subtle ambient motion
@@ -204,7 +208,6 @@ background-size: 60px 60px;
   .hero-particle { animation: none; }
 }
 
-.hero-content { position: relative; z-index: 2; padding-top: 12rem; }
 .hero-tag {
 display: inline-flex; align-items: center; gap: 0.5rem;
 padding: 0.4rem 1rem; border-radius: 100px;
