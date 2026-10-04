@@ -5,10 +5,10 @@ A personal portfolio website built with HTML, CSS, and JavaScript. This is a sin
 ## Project Structure
 
 ```
-├── Index.html            # Main HTML file with all page sections
+├── index.html            # Main HTML file with all page sections
 ├── 404.html              # Custom 404 error page
 ├── manifest.json         # PWA manifest (installability, theme colors, icons)
-├── _redirects            # Netlify SPA fallback for clean URLs
+├── vercel.json           # Vercel SPA fallback for clean URLs
 ├── css/
 │   └── main.css          # All styles (formerly inline in HTML)
 ├── js/
@@ -41,14 +41,14 @@ This site uses the **History API** for clean, crawlable URLs (no `#` fragments):
 | `/contact?service=Brand%20Identity` | Contact with service pre-filled |
 | `/project/project-1` | Project detail |
 
-Navigation is handled client-side via `history.pushState()`; the browser back/forward buttons work through the `popstate` event. The `_redirects` file tells Netlify to serve `Index.html` for every route, so direct URL loads and page refreshes work correctly.
+Navigation is handled client-side via `history.pushState()`; the browser back/forward buttons work through the `popstate` event. The `vercel.json` rewrite rule tells Vercel to serve `index.html` for every route, so direct URL loads and page refreshes work correctly.
 
-> **Note:** If deploying to a host other than Netlify, add the equivalent SPA rewrite rule (e.g. Apache `.htaccess`, Vercel `vercel.json`, or nginx `try_files`).
+> **Note:** `rewrites` are applied *after* Vercel's static file check, so assets like `/css/main.css` and `/images/*` are still served directly — only unmatched routes fall through to the SPA. Because the rule is a catch-all, `404.html` is effectively unreachable and unknown URLs render the SPA instead.
 
 
 ## Features
 
-- **Single Page Application** — All pages are sections within Index.html, shown/hidden via JavaScript
+- **Single Page Application** — All pages are sections within index.html, shown/hidden via JavaScript
 - **6 Pages** — Home, About, Services, Portfolio, Project Detail, Contact
 - **Smooth Transitions** — Page fade-in animations
 - **Project Filtering** — Filter portfolio items by category
@@ -77,7 +77,7 @@ Navigation is handled client-side via `history.pushState()`; the browser back/fo
 ### Local Development
 
 1. Clone or download this repository
-2. Open `Index.html` in any modern web browser
+2. Open `index.html` in any modern web browser
 3. That's it! No build process required
 
 ### Customizing
@@ -114,10 +114,22 @@ const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER";
 
 This is a static site that can be deployed anywhere:
 
-- **GitHub Pages** (recommended — free)
+- **Vercel** (current host)
 - Netlify
-- Vercel
+- GitHub Pages
 - Any web host
+
+### Vercel Setup (current)
+
+1. Go to [vercel.com/new](https://vercel.com/new) and import `Oathman001/My-Portfolio`
+2. Framework Preset: **Other**
+3. Build Command: *leave empty*
+4. Output Directory: `.`
+5. `vercel.json` in the repo root supplies the SPA rewrite automatically — no build step required
+
+Deploys happen automatically on every push to `main`. Preview deployments are generated for other branches.
+
+> **Note:** The entry file must be lowercase `index.html`. Vercel's filesystem is case-sensitive Linux, so `Index.html` will not be served at `/`.
 
 ### GitHub Pages Setup
 
